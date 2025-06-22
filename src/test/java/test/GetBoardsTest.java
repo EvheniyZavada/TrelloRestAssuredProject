@@ -18,8 +18,7 @@ public class GetBoardsTest {
         RestAssured.given()//предусловие для вызова конструкций
                 .log().method()//log настраивается вариативно
                 .baseUri("https://api.trello.com/1")
-                .queryParams(Map.of("key", "4d9dd97638a81eaec3d5a7f125b6b562",
-                       "token", "ATTAac7d6572f06502abadc634407cef8927be972cf00c41777a053365e7ffcb6101C7527E9B"))
+                .queryParams(Map.of("key", TrelloAuthInfo.getKey(), "token", TrelloAuthInfo.getToken()))
                 .header("Accept","application/json")
                 .queryParams("fields", "id,name")
                 .pathParam("id", "zavada1997@gmail.com")
@@ -35,15 +34,14 @@ public class GetBoardsTest {
                 .log().method()
                 .baseUri("https://api.trello.com/1")
                 .pathParam("id", "68499967310c9b0128bb22c1")
-                .queryParams(Map.of("key", "4d9dd97638a81eaec3d5a7f125b6b562",
-                        "token", "ATTAac7d6572f06502abadc634407cef8927be972cf00c41777a053365e7ffcb6101C7527E9B"))
+                .queryParams(Map.of("key", TrelloAuthInfo.getKey(), "token", TrelloAuthInfo.getToken()))
                 .get("/boards/{id}?key=APIKey&token=APIToken")
                 .then()
                 .statusCode(200)
 //        var timeInSeconds = response.getTimeIn(TimeUnit.SECONDS);
 //        System.out.println("response time " + timeInSeconds + " seconds");
 //              .assertThat()
-                .time(lessThan(3000l))
+                .time(lessThan(3000L))
                 .body("name",equalTo("доска"))//проверка значений body
                 .log().body();
     }
