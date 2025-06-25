@@ -1,23 +1,13 @@
 package test;
-
-import io.restassured.RestAssured;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.jupiter.api.Test;
-
-import java.util.Map;
-
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
 
-public class GetCardsTest {
-    private static final Log log = LogFactory.getLog(GetCardsTest.class);
+public class GetCardsTest extends  BaseTest{
     @Test
     public void checkGetLists(){
-        RestAssured.given()
+        requestWithAuth()
                 .log().method()
-                .baseUri("https://api.trello.com/1")
-                .queryParams(Map.of("key", TrelloAuthInfo.getKey(),"token", TrelloAuthInfo.getToken()))
                 .pathParam("id", "68499967310c9b0128bb22c1")
                 .get("/boards/{id}/lists")
                 .then()
@@ -27,10 +17,8 @@ public class GetCardsTest {
 
     @Test
     public void checkGetCards(){
-        RestAssured.given()
+        requestWithAuth()
                 .log().method()
-                .baseUri("https://api.trello.com/1")
-                .queryParams(Map.of("key", TrelloAuthInfo.getKey(),"token", TrelloAuthInfo.getToken()))
                 .pathParam("id", "68499967310c9b0128bb2315")
                 .get("/lists/{id}/cards")
                 .then()
@@ -40,10 +28,8 @@ public class GetCardsTest {
 
     @Test
     public void checkGetCard(){
-        RestAssured.given()
+        requestWithAuth()
                 .log().method()
-                .baseUri("https://api.trello.com/1")
-                .queryParams(Map.of("key",TrelloAuthInfo.getKey(), "token", TrelloAuthInfo.getToken()))
                 .pathParam("id", "68345fadb7caea7fdd9104e3")
                 .get("/cards/{id}")
                 .then()
