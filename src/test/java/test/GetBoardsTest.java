@@ -32,7 +32,7 @@ public class GetBoardsTest extends BaseTest {
 //              .assertThat()
                 .time(lessThan(3000L))
                 .body("name",equalTo("доска"))//проверка значений body
-                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schemas/get_board.json"))
+                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schemas/get_board.json"))//проверка схемы
                 .log().body();
     }
 }

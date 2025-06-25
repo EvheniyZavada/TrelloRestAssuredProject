@@ -14,10 +14,10 @@ import static org.hamcrest.Matchers.lessThan;
 
 public class GetBoardValidationTest extends BaseTest{
 
-    @ParameterizedTest
-    @ArgumentsSource(AuthValidationArgumentsProvider.class)
+    @ParameterizedTest //тест параметризован
+    @ArgumentsSource(AuthValidationArgumentsProvider.class) //откуда берем параметры
     public void checkGetBoardWithInvalidAuth(AuthValidationArgumentsHolder validationArguments){
-            Response response = requestWithoutAuth()
+            Response response = requestWithoutAuth() //убрали авторизацию из BaseTest(оставили пустые), добавили response
                     .log().method()
                     .pathParam("id", "68499967310c9b0128bb22c1")
                     .queryParams("fields", "id,name")
