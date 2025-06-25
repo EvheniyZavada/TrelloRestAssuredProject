@@ -18,7 +18,7 @@ public class GetBoardValidationTest extends BaseTest{
                     .pathParam("id", "68499967310c9b0128bb22c1")
                     .queryParams("fields", "id,name")
                     .get("/boards/{id}?key=APIKey&token=APIToken");
-        response
+        response //вызвали ответ
                     .then()
                     .statusCode(401)
                     .log().body();
