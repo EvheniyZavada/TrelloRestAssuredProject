@@ -1,16 +1,12 @@
 package test;
 
 import holders.AuthValidationArgumentsHolder;
-import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 import providers.AuthValidationArgumentsProvider;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.lessThan;
 
 public class GetBoardValidationTest extends BaseTest{
 
