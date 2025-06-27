@@ -1,4 +1,5 @@
 package test;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import org.junit.jupiter.api.Test;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
@@ -36,6 +37,7 @@ public class GetCardsTest extends  BaseTest{
                 .statusCode(200)
                 .time(lessThan(3000L))
                 .body("desc",equalTo("WOW"))
+                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schemas/get_card.json"))
                 .log().body();
     }
 }
