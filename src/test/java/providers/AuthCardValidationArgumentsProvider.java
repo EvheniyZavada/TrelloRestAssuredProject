@@ -4,18 +4,19 @@ import holders.AuthValidationArgumentsHolder;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
+
 import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class AuthValidationArgumentsProvider implements ArgumentsProvider {
+public class AuthCardValidationArgumentsProvider implements ArgumentsProvider {
 
     @Override
     public Stream provideArguments(ExtensionContext extensionContext) { // имплемент метода интерфейса(привел к нужному виду)
         return Stream.of(
                 new AuthValidationArgumentsHolder( //обьект класса holder и заполенение параметров невалидными данными(ни ключа ни токена)
                         Collections.emptyMap(),
-                        "unauthorized permission requested" // сначала оставляем пустым, после запуска теста(getBoardValidationTest) копируем лог ошибки в консоли
+                        "unauthorized card permission requested" // сначала оставляем пустым, после запуска теста(getBoardValidationTest) копируем лог ошибки в консоли
                 ),
                 new AuthValidationArgumentsHolder(//только ключ
                         Map.of("key", "4d9dd97638a81eaec3d5a7f125b6b562"),
@@ -28,4 +29,3 @@ public class AuthValidationArgumentsProvider implements ArgumentsProvider {
         ).map(Arguments::of); //
     }
 }
-

@@ -17,8 +17,8 @@ public class GetBoardValidationTest extends BaseTest{
             Response response = requestWithoutAuth() //убрали авторизацию из BaseTest(оставили пустые), добавили response
                     .log().method()
                     .pathParam("id", "68499967310c9b0128bb22c1")
-                    .queryParams("fields", "id,name")
-                    .get("/boards/{id}?key=APIKey&token=APIToken");
+                    .queryParams(validationArguments.getAuthParams())
+                    .get("/boards/{id}");
         response
                     .then()
                     .statusCode(401)
@@ -31,7 +31,7 @@ public class GetBoardValidationTest extends BaseTest{
           Response response = requestWithAuth()
                 .log().method()
                 .pathParam("id", "68499967310c9b0128bb22c7") //7 instead 1 in the end
-                .get("/boards/{id}?key=APIKey&token=APIToken");
+                .get("/boards/{id}");
           response
                 .then()
                 .statusCode(404);
@@ -43,7 +43,7 @@ public class GetBoardValidationTest extends BaseTest{
         Response response = requestWithAuth()
                 .log().method()
                 .pathParam("id", "68499967310c9b0128bb22c")// -1 char
-                .get("/boards/{id}?key=APIKey&token=APIToken");
+                .get("/boards/{id}");
         response
                 .then()
                 .statusCode(400);
@@ -55,7 +55,7 @@ public class GetBoardValidationTest extends BaseTest{
         Response response = requestWithAuth()
                 .log().method()
                 .pathParam("id", "68499967310c9b0128bb22c17")// +1 char
-                .get("/boards/{id}?key=APIKey&token=APIToken");
+                .get("/boards/{id}");
         response
                 .then()
                 .statusCode(400);
@@ -67,11 +67,11 @@ public class GetBoardValidationTest extends BaseTest{
         Response response = requestWithAuth()
                 .log().method()
                 .pathParam("id", "")//no id
-                .get("/boards/{id}?key=APIKey&token=APIToken");
+                .get("/boards/{id}");
         response
                 .then()
                 .statusCode(404);
-        Assertions.assertEquals("Cannot GET /1/boards/?key=4d9dd97638a81eaec3d5a7f125b6b562&key=APIKey&token=ATTAac7d6572f06502abadc634407cef8927be972cf00c41777a053365e7ffcb6101C7527E9B&token=APIToken",
+        Assertions.assertEquals("Cannot GET /1/boards/?key=4d9dd97638a81eaec3d5a7f125b6b562&token=ATTAac7d6572f06502abadc634407cef8927be972cf00c41777a053365e7ffcb6101C7527E9B",
                 response.body().asString());
     }
 }
