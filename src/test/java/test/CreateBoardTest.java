@@ -4,12 +4,9 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDateTime;
 import java.util.Map;
-
 import static org.hamcrest.Matchers.equalTo;
 
 public class CreateBoardTest extends BaseTest {
@@ -19,7 +16,7 @@ public class CreateBoardTest extends BaseTest {
     @Test
     public void checkCreateBoard(){
 
-        String boardName = "CreatedBoard " + LocalDateTime.now();
+        String boardName = "";// + LocalDateTime.now();
          Response response = requestWithAuth()
                 .log().method()
                 .body(Map.of("name", boardName))

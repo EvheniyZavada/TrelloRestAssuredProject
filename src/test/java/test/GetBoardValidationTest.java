@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
-import providers.AuthValidationArgumentsProvider;
+import providers.AuthGetBoardValidationArgumentsProvider;
 
 
 public class GetBoardValidationTest extends BaseTest{
 
     @ParameterizedTest //тест параметризован
-    @ArgumentsSource(AuthValidationArgumentsProvider.class) //откуда берем параметры
+    @ArgumentsSource(AuthGetBoardValidationArgumentsProvider.class) //откуда берем параметры
     public void checkGetBoardWithInvalidAuth(AuthValidationArgumentsHolder validationArguments){
             Response response = requestWithoutAuth() //убрали авторизацию из BaseTest(оставили пустые), добавили response
                     .log().method()
