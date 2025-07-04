@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class AuthCreateBoardValidationArgumentsProvider implements ArgumentsProvider {
+public class AuthCreateCardValidationArgumentsProvider implements ArgumentsProvider {
 
     @Override
     public Stream provideArguments(ExtensionContext extensionContext) { // имплемент метода интерфейса(привел к нужному виду)

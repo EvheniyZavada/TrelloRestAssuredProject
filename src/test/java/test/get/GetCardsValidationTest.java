@@ -1,5 +1,6 @@
-package test;
+package test.get;
 
+import consts.ConstsHolder;
 import holders.AuthValidationArgumentsHolder;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 import providers.AuthCardValidationArgumentsProvider;
+import test.BaseTest;
 
 
 public class GetCardsValidationTest extends BaseTest {
@@ -16,9 +18,9 @@ public class GetCardsValidationTest extends BaseTest {
     public void checkGetCardWithInvalidAuth(AuthValidationArgumentsHolder validationArguments){
         Response response = requestWithoutAuth() //убрали авторизацию из BaseTest(оставили пустые), добавили response
                 .log().method()
-                .pathParam("id", "68345fadb7caea7fdd9104e3")
+                .pathParam("id", ConstsHolder.theirBoardCardId)
                 .queryParams(validationArguments.getAuthParams())
-                .get("/cards/{id}");
+                .get(ConstsHolder.getCardEndpoint);
         response
                 .then()
                 .statusCode(401)
@@ -30,8 +32,8 @@ public class GetCardsValidationTest extends BaseTest {
     public void chekGetCardWithInvalidId(){
         Response response = requestWithAuth()
                 .log().method()
-                .pathParam("id", "68345fadb7caea7fdd9104e9") //7 instead 1 in the end
-                .get("/cards/{id}");
+                .pathParam("id", ConstsHolder.invalidCardId) //7 instead 1 in the end
+                .get(ConstsHolder.getCardEndpoint);
         response
                 .then()
                 .statusCode(404);
@@ -42,8 +44,8 @@ public class GetCardsValidationTest extends BaseTest {
     public void chekGetCardWithInvalidShortId(){
         Response response = requestWithAuth()
                 .log().method()
-                .pathParam("id", "68345fadb7caea7fdd9104e")// -1 char
-                .get("/cards/{id}");
+                .pathParam("id", ConstsHolder.invalidShortCardId)// -1 char
+                .get(ConstsHolder.getCardEndpoint);
         response
                 .then()
                 .statusCode(400);
@@ -54,8 +56,8 @@ public class GetCardsValidationTest extends BaseTest {
     public void chekGetCardWithInvalidLongId(){
         Response response = requestWithAuth()
                 .log().method()
-                .pathParam("id", "68499967310c9b0128bb22c171")// +1 char
-                .get("/cards/{id}");
+                .pathParam("id", ConstsHolder.invalidLongCardId)// +1 char
+                .get(ConstsHolder.getCardEndpoint);
         response
                 .then()
                 .statusCode(400);
@@ -67,7 +69,7 @@ public class GetCardsValidationTest extends BaseTest {
         Response response = requestWithAuth()
                 .log().method()
                 .pathParam("id", "")//no id
-                .get("/cards/{id}");
+                .get(ConstsHolder.getCardEndpoint);
         response
                 .then()
                 .statusCode(404);

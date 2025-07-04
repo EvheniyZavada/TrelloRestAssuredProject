@@ -1,5 +1,6 @@
-package test;
+package test.get;
 
+import consts.ConstsHolder;
 import holders.AuthValidationArgumentsHolder;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
@@ -7,18 +8,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 import providers.AuthGetBoardValidationArgumentsProvider;
+import test.BaseTest;
 
 
-public class GetBoardValidationTest extends BaseTest{
+public class GetBoardValidationTest extends BaseTest {
 
     @ParameterizedTest //тест параметризован
     @ArgumentsSource(AuthGetBoardValidationArgumentsProvider.class) //откуда берем параметры
     public void checkGetBoardWithInvalidAuth(AuthValidationArgumentsHolder validationArguments){
             Response response = requestWithoutAuth() //убрали авторизацию из BaseTest(оставили пустые), добавили response
                     .log().method()
-                    .pathParam("id", "68499967310c9b0128bb22c1")
+                    .pathParam("id", ConstsHolder.boardId)
                     .queryParams(validationArguments.getAuthParams())
-                    .get("/boards/{id}");
+                    .get(ConstsHolder.getBoardEndpoint);
         response
                     .then()
                     .statusCode(401)
@@ -30,8 +32,8 @@ public class GetBoardValidationTest extends BaseTest{
     public void chekGetBoardWithInvalidId(){
           Response response = requestWithAuth()
                 .log().method()
-                .pathParam("id", "68499967310c9b0128bb22c7") //7 instead 1 in the end
-                .get("/boards/{id}");
+                .pathParam("id", ConstsHolder.invalidBoardId) //7 instead 1 in the end
+                .get(ConstsHolder.getBoardEndpoint);
           response
                 .then()
                 .statusCode(404);
@@ -42,8 +44,8 @@ public class GetBoardValidationTest extends BaseTest{
     public void chekGetBoardWithInvalidShortId(){
         Response response = requestWithAuth()
                 .log().method()
-                .pathParam("id", "68499967310c9b0128bb22c")// -1 char
-                .get("/boards/{id}");
+                .pathParam("id", ConstsHolder.invalidShortBoardId)// -1 char
+                .get(ConstsHolder.getBoardEndpoint);
         response
                 .then()
                 .statusCode(400);
@@ -54,8 +56,8 @@ public class GetBoardValidationTest extends BaseTest{
     public void chekGetBoardWithInvalidLongId(){
         Response response = requestWithAuth()
                 .log().method()
-                .pathParam("id", "68499967310c9b0128bb22c17")// +1 char
-                .get("/boards/{id}");
+                .pathParam("id", ConstsHolder.invalidLongBoardId)// +1 char
+                .get(ConstsHolder.getBoardEndpoint);
         response
                 .then()
                 .statusCode(400);
@@ -67,7 +69,7 @@ public class GetBoardValidationTest extends BaseTest{
         Response response = requestWithAuth()
                 .log().method()
                 .pathParam("id", "")//no id
-                .get("/boards/{id}");
+                .get(ConstsHolder.getBoardEndpoint);
         response
                 .then()
                 .statusCode(404);

@@ -1,10 +1,13 @@
-package test;
+package test.post;
 
+import consts.ConstsHolder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import test.BaseTest;
+
 import java.time.LocalDateTime;
 import java.util.Map;
 import static org.hamcrest.Matchers.equalTo;
@@ -16,12 +19,12 @@ public class CreateBoardTest extends BaseTest {
     @Test
     public void checkCreateBoard(){
 
-        String boardName = "";// + LocalDateTime.now();
+        String boardName = "CreatedBoard" + LocalDateTime.now();
          Response response = requestWithAuth()
                 .log().method()
                 .body(Map.of("name", boardName))
                  .contentType(ContentType.JSON)
-                .post("/boards/");
+                .post(ConstsHolder.createBoardEndpoint);
          createdBoardId = response.jsonPath().get("id");
          response
                 .then()//validatable response
@@ -31,8 +34,8 @@ public class CreateBoardTest extends BaseTest {
         requestWithAuth()
                 .log().method()
                 .queryParams("fields", "id,name")
-                .pathParam("id", "zavada1997@gmail.com")
-                .get("/members/{id}/boards")
+                .pathParam("id", ConstsHolder.userName)
+                .get(ConstsHolder.getBoardsEndpoint)
                 .then()
                 .statusCode(200)
                 .body("name", Matchers.hasItem(boardName));
@@ -42,7 +45,7 @@ public class CreateBoardTest extends BaseTest {
     public void deleteCreatedBoard(){
         requestWithAuth()
                 .pathParam("id", createdBoardId)
-                .delete("/boards/{id}")
+                .delete(ConstsHolder.deleteBoardEndpoint)
                 .then()
                 .statusCode(200);
     }

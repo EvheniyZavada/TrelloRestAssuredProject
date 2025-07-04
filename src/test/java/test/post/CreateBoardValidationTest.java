@@ -1,5 +1,6 @@
-package test;
+package test.post;
 
+import consts.ConstsHolder;
 import holders.AuthValidationArgumentsHolder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -8,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 import providers.AuthCreateBoardValidationArgumentsProvider;
+import test.BaseTest;
+
 import java.util.Map;
 
 public class CreateBoardValidationTest extends BaseTest {
@@ -17,11 +20,12 @@ public class CreateBoardValidationTest extends BaseTest {
     public void checkCreateBoardWithInvalidAuth(AuthValidationArgumentsHolder validationArguments){
         Response response = requestWithoutAuth()
                 .log().method()
+                .contentType(ContentType.JSON)
                 .body(Map.of("name", "noname"))
-                .post("/boards/");
+                .post(ConstsHolder.createBoardEndpoint);
         response
                 .then()
-                .statusCode(400)
+                .statusCode(401)
                 .log().body();
         Assertions.assertEquals(validationArguments.getErrorMessage(), response.body().asString());
     }
@@ -32,7 +36,7 @@ public class CreateBoardValidationTest extends BaseTest {
                 .log().method()
                 .contentType(ContentType.JSON)
                 .body(Map.of("name", ""))
-                .post("/boards/");
+                .post(ConstsHolder.createBoardEndpoint);
         response
                 .then()
                 .statusCode(400)
@@ -46,7 +50,7 @@ public class CreateBoardValidationTest extends BaseTest {
                 .log().method()
                 .contentType(ContentType.JSON)
                 .body(Map.of("name", " "))
-                .post("/boards/");
+                .post(ConstsHolder.createBoardEndpoint);
         response
                 .then()
                 .statusCode(400)
@@ -58,9 +62,9 @@ public class CreateBoardValidationTest extends BaseTest {
     public void checkCreateBoardWithEmptyKeyForName(){
         Response response = requestWithAuth()
                 .log().method()
-                .contentType(ContentType.JSON)// нужно? когда?
+                .contentType(ContentType.JSON)
                 .body(Map.of("", "qwe"))
-                .post("/boards/");
+                .post(ConstsHolder.createBoardEndpoint);
         response
                 .then()
                 .statusCode(400)
@@ -72,8 +76,9 @@ public class CreateBoardValidationTest extends BaseTest {
     public void checkCreateBoardWithEmptyKeyAndValueForName(){
         Response response = requestWithAuth()
                 .log().method()
+                .contentType(ContentType.JSON)
                 .body(Map.of("",""))
-                .post("/boards/");
+                .post(ConstsHolder.createBoardEndpoint);
         response
                 .then()
                 .statusCode(400)
