@@ -1,6 +1,6 @@
 package test.post;
 
-import consts.ConstsHolder;
+import consts.UrlParamsValues;
 import holders.AuthValidationArgumentsHolder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -13,6 +13,8 @@ import test.BaseTest;
 
 import java.util.Map;
 
+import static consts.BoardsEndpoints.CREATE_BOARD_URL;
+
 public class CreateBoardValidationTest extends BaseTest {
 
     @ParameterizedTest
@@ -22,7 +24,7 @@ public class CreateBoardValidationTest extends BaseTest {
                 .log().method()
                 .contentType(ContentType.JSON)
                 .body(Map.of("name", "noname"))
-                .post(ConstsHolder.createBoardEndpoint);
+                .post(CREATE_BOARD_URL);
         response
                 .then()
                 .statusCode(401)
@@ -36,7 +38,7 @@ public class CreateBoardValidationTest extends BaseTest {
                 .log().method()
                 .contentType(ContentType.JSON)
                 .body(Map.of("name", ""))
-                .post(ConstsHolder.createBoardEndpoint);
+                .post(CREATE_BOARD_URL);
         response
                 .then()
                 .statusCode(400)
@@ -50,7 +52,7 @@ public class CreateBoardValidationTest extends BaseTest {
                 .log().method()
                 .contentType(ContentType.JSON)
                 .body(Map.of("name", " "))
-                .post(ConstsHolder.createBoardEndpoint);
+                .post(CREATE_BOARD_URL);
         response
                 .then()
                 .statusCode(400)
@@ -64,7 +66,7 @@ public class CreateBoardValidationTest extends BaseTest {
                 .log().method()
                 .contentType(ContentType.JSON)
                 .body(Map.of("", "qwe"))
-                .post(ConstsHolder.createBoardEndpoint);
+                .post(CREATE_BOARD_URL);
         response
                 .then()
                 .statusCode(400)
@@ -78,7 +80,7 @@ public class CreateBoardValidationTest extends BaseTest {
                 .log().method()
                 .contentType(ContentType.JSON)
                 .body(Map.of("",""))
-                .post(ConstsHolder.createBoardEndpoint);
+                .post(CREATE_BOARD_URL);
         response
                 .then()
                 .statusCode(400)

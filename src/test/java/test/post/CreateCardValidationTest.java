@@ -1,6 +1,6 @@
 package test.post;
 
-import consts.ConstsHolder;
+import consts.UrlParamsValues;
 import holders.AuthValidationArgumentsHolder;
 import holders.CardNameValidationArgumentsHolder;
 import io.restassured.http.ContentType;
@@ -14,6 +14,8 @@ import test.BaseTest;
 
 import java.util.Map;
 
+import static consts.CardsEndpoints.CREATE_CARD_URL;
+
 public class CreateCardValidationTest extends BaseTest {
 
     @ParameterizedTest
@@ -22,8 +24,8 @@ public class CreateCardValidationTest extends BaseTest {
         Response response = requestWithoutAuth()
                 .log().method()
                 .contentType(ContentType.JSON)
-                .body(Map.of("idList", ConstsHolder.myBoardInProgressListId, "name", "My_name"))
-                .post(ConstsHolder.createCardEndpoint);
+                .body(Map.of("idList", UrlParamsValues.MY_BOARD_IN_PROGRESS_LIST_ID, "name", "My_name"))
+                .post(CREATE_CARD_URL);
         response
                 .then()
                 .statusCode(401)
@@ -38,7 +40,7 @@ public class CreateCardValidationTest extends BaseTest {
                 .log().method()
                 .contentType(ContentType.JSON)
                 .body(validationArgumentsHolder.getBodyParams())
-                .post(ConstsHolder.createCardEndpoint);
+                .post(CREATE_CARD_URL);
         response
                 .then()
                 .statusCode(400)

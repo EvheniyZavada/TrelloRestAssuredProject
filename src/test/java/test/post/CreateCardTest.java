@@ -1,6 +1,6 @@
 package test.post;
 
-import consts.ConstsHolder;
+import consts.UrlParamsValues;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
@@ -11,6 +11,7 @@ import test.BaseTest;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+import static consts.CardsEndpoints.*;
 import static org.hamcrest.Matchers.equalTo;
 
 public class CreateCardTest extends BaseTest {
@@ -24,8 +25,8 @@ public class CreateCardTest extends BaseTest {
                 .log().method()
                 .contentType(ContentType.JSON) //must have(как в постмане нужно тип тела выбрать)
               //  .queryParams("fields", "id,name,desc")
-                .body(Map.of("idList",ConstsHolder.myBoardInProgressListId, "name", cardName, "desc", "*_*"))
-                .post(ConstsHolder.createCardEndpoint);
+                .body(Map.of("idList", UrlParamsValues.MY_BOARD_IN_PROGRESS_LIST_ID, "name", cardName, "desc", "*_*"))
+                .post(CREATE_CARD_URL);
         createdCardId = response.jsonPath().get("id");
         response
                 .then()
@@ -33,10 +34,10 @@ public class CreateCardTest extends BaseTest {
                 .body("name",equalTo(cardName))
                 .log().body();
         requestWithAuth()
-                .pathParam("id", ConstsHolder.myBoardInProgressListId)
+                .pathParam("id", UrlParamsValues.MY_BOARD_IN_PROGRESS_LIST_ID)
                 .header("Accept", "application/json")
                 .queryParams("fields", "id,name")
-                .get(ConstsHolder.getCardsEndpoint)
+                .get(GET_ALL_CARDS_URL)
                 .then()
                 .body("name", Matchers.hasItem(cardName))
                 .statusCode(200)
@@ -47,7 +48,7 @@ public class CreateCardTest extends BaseTest {
     public void deleteCreatedCard(){
         requestWithAuth()
                 .pathParam("id", createdCardId)
-                .delete(ConstsHolder.deleteCardEndpoint)
+                .delete(DELETE_CARD_URL)
                 .then()
                 .statusCode(200);
     }

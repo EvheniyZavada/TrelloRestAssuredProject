@@ -1,9 +1,11 @@
 package test.get;
-import consts.ConstsHolder;
+import consts.UrlParamsValues;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import org.junit.jupiter.api.Test;
 import test.BaseTest;
 
+import static consts.BoardsEndpoints.GET_ALL_BOARDS_URL;
+import static consts.BoardsEndpoints.GET_BOARD_URL;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
 
@@ -14,8 +16,8 @@ public class GetBoardsTest extends BaseTest {
         requestWithAuth()
                 .log().method()//log настраивается вариативно
                 .queryParams("fields", "id,name")
-                .pathParam("id", ConstsHolder.userName)
-                .get(ConstsHolder.getBoardsEndpoint)
+                .pathParam("id", UrlParamsValues.USER_NAME)
+                .get(GET_ALL_BOARDS_URL)
                 .then()
                 .statusCode(200)
                 .log().body();// получить тело запроса в консоль
@@ -25,9 +27,9 @@ public class GetBoardsTest extends BaseTest {
     public void checkGetBoard(){
         requestWithAuth()
                 .log().method()
-                .pathParam("id", ConstsHolder.boardId)
+                .pathParam("id", UrlParamsValues.BOARD_ID)
                 .queryParams("fields", "id,name")
-                .get(ConstsHolder.getBoardEndpoint)
+                .get(GET_BOARD_URL)
                 .then()
                 .statusCode(200)
 //        var timeInSeconds = response.getTimeIn(TimeUnit.SECONDS);

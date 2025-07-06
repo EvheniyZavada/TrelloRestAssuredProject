@@ -28,7 +28,10 @@ public class CardNameValidationArgumentsProvider implements ArgumentsProvider {
                 new CardNameValidationArgumentsHolder(Map.of(
                         "idList","684497a8f96fc4515a307c9f",
                         "name", new String[]{"a", "b"}),
-                        "invalid value for name")
+                        "invalid value for name"),
+                new CardNameValidationArgumentsHolder(Map.of(
+                        "name", "NEW CARD"),
+                "invalid value for idList")
         ).map(Arguments::of);
 
 

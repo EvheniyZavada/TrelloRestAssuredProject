@@ -1,5 +1,5 @@
 package test;
-import consts.ConstsHolder;
+import consts.UrlParamsValues;
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,8 +15,8 @@ public class BaseTest {
 
     protected static RequestSpecification requestWithAuth(){
         return RestAssured.given()
-                .queryParams(Map.of("key", ConstsHolder.TrelloKeyValue,
-                        "token", ConstsHolder.TrelloTokenValue))
+                .queryParams(Map.of("key", UrlParamsValues.VALID_KEY,
+                        "token", UrlParamsValues.VALID_TOKEN))
                 .header("Accept", "application/json");
     }
 

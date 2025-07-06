@@ -1,9 +1,10 @@
 package test.get;
-import consts.ConstsHolder;
+import consts.UrlParamsValues;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import org.junit.jupiter.api.Test;
 import test.BaseTest;
 
+import static consts.CardsEndpoints.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
 
@@ -12,8 +13,8 @@ public class GetCardsTest extends BaseTest {
     public void checkGetLists(){
         requestWithAuth()
                 .log().method()
-                .pathParam("id", ConstsHolder.myBoardId)
-                .get(ConstsHolder.getListsEndpoint)
+                .pathParam("id", UrlParamsValues.MY_BOARD_ID)
+                .get(GET_ALL_LISTS_URL)
                 .then()
                 .statusCode(200)
                 .log().body();
@@ -23,8 +24,8 @@ public class GetCardsTest extends BaseTest {
     public void checkGetCards(){
         requestWithAuth()
                 .log().method()
-                .pathParam("id", ConstsHolder.myBoardInProgressListId)
-                .get(ConstsHolder.getCardsEndpoint)
+                .pathParam("id", UrlParamsValues.MY_BOARD_IN_PROGRESS_LIST_ID)
+                .get(GET_ALL_CARDS_URL)
                 .then()
                 .statusCode(200)
                 .log().body();
@@ -34,8 +35,8 @@ public class GetCardsTest extends BaseTest {
     public void checkGetCard(){
         requestWithAuth()
                 .log().method()
-                .pathParam("id", ConstsHolder.theirBoardCardId)
-                .get(ConstsHolder.getCardEndpoint)
+                .pathParam("id", UrlParamsValues.THEIR_BOARD_CARD_ID)
+                .get(GET_CARD_URL)
                 .then()
                 .statusCode(200)
                 .time(lessThan(3000L))
