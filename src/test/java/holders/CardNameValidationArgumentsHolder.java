@@ -4,6 +4,9 @@ import java.util.Map;
 
 public class CardNameValidationArgumentsHolder<E> {
 
+    private final Map<String,E> bodyParams;
+    private final String errorMessage;
+
     public CardNameValidationArgumentsHolder(Map<String, E> bodyParams, String errorMessage) {
         this.bodyParams = bodyParams;
         this.errorMessage = errorMessage;
@@ -16,8 +19,5 @@ public class CardNameValidationArgumentsHolder<E> {
     public String getErrorMessage() {
         return errorMessage;
     }
-
-    private final Map<String,E> bodyParams;
-    private final String errorMessage;
 
 }

@@ -16,6 +16,7 @@ public class UrlParamsValues {
     public static final String INVALID_CARD_ID = "68345fadb7caea7fdd9104e9";
     public static final String INVALID_SHORT_CARD_ID = "68345fadb7caea7fdd9104e";
     public static final String INVALID_LONG_CARD_ID = "68499967310c9b0128bb22c171";
+    public static final String CARD_ID_TO_UPDATE = "68345fadb7caea7fdd9104e3";
 
     public static final String VALID_KEY = "4d9dd97638a81eaec3d5a7f125b6b562";
     public static final String VALID_TOKEN = "ATTAac7d6572f06502abadc634407cef8927be972cf00c41777a053365e7ffcb6101C7527E9B";
