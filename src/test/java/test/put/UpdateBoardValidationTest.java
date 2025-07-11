@@ -45,7 +45,7 @@ public class UpdateBoardValidationTest extends BaseTest {
                 .put(UPDATE_BOARD_URL);
         response
                 .then()
-                //.statusCode(400)?
+                .statusCode(argumentsHolder.getStatusCode())
                 .log().body();
         Assertions.assertEquals(argumentsHolder.getErrorMessage(), response.body().asString());
     }

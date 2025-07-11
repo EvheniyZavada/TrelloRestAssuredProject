@@ -2,20 +2,16 @@ package holders;
 
 import java.util.Map;
 
-public class BoardIdValidationArgumentsHolder {
+public class CardIdValidationArgumentsHolder {
 
     private final Map<String, Object> pathParams;
     private final String errorMessage;
     private final Integer statusCode;
 
-    public BoardIdValidationArgumentsHolder(Map<String, Object> pathParams, String errorMessage, Integer statusCode) {
+    public CardIdValidationArgumentsHolder(Map<String, Object> pathParams, String errorMessage, Integer statusCode) {
         this.pathParams = pathParams;
         this.errorMessage = errorMessage;
         this.statusCode = statusCode;
-    }
-
-    public Integer getStatusCode() {
-        return statusCode;
     }
 
     public String getErrorMessage() {
@@ -24,5 +20,9 @@ public class BoardIdValidationArgumentsHolder {
 
     public Map<String, Object> getPathParams() {
         return pathParams;
+    }
+
+    public Integer getStatusCode() {
+        return statusCode;
     }
 }

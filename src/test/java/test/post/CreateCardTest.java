@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 import static consts.CardsEndpoints.*;
+import static consts.UrlParamsValues.MY_BOARD_IN_PROGRESS_LIST_ID;
 import static org.hamcrest.Matchers.equalTo;
 
 public class CreateCardTest extends BaseTest {
@@ -25,7 +26,7 @@ public class CreateCardTest extends BaseTest {
                 .log().method()
                 .contentType(ContentType.JSON) //must have(как в постмане нужно тип тела выбрать)
               //  .queryParams("fields", "id,name,desc")
-                .body(Map.of("idList", UrlParamsValues.MY_BOARD_IN_PROGRESS_LIST_ID, "name", cardName, "desc", "*_*"))
+                .body(Map.of("idList", MY_BOARD_IN_PROGRESS_LIST_ID, "name", cardName, "desc", "*_*"))
                 .post(CREATE_CARD_URL);
         createdCardId = response.jsonPath().get("id");
         response
@@ -34,7 +35,7 @@ public class CreateCardTest extends BaseTest {
                 .body("name",equalTo(cardName))
                 .log().body();
         requestWithAuth()
-                .pathParam("id", UrlParamsValues.MY_BOARD_IN_PROGRESS_LIST_ID)
+                .pathParam("id", MY_BOARD_IN_PROGRESS_LIST_ID)
                 .header("Accept", "application/json")
                 .queryParams("fields", "id,name")
                 .get(GET_ALL_CARDS_URL)

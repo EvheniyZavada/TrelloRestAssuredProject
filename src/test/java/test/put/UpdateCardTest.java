@@ -16,8 +16,8 @@ import static consts.UrlParamsValues.CARD_ID_TO_UPDATE;
 public class UpdateCardTest extends BaseTest {
 
     @Test
-    public void checkUpdateCard(){
-
+    public void checkUpdateCard()
+    {
         String updatedCardName = "updatedNameOfCard" + LocalDateTime.now();
         Response response = requestWithAuth()
                 .log().method()
