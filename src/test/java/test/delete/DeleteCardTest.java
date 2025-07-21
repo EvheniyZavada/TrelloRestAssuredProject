@@ -33,7 +33,6 @@ public class DeleteCardTest extends BaseTest {
                     .statusCode(200)
                     .body("id", Matchers.not(Matchers.hasItem(cardIdToDelete)))
                     .log().body();
-
     }
 
     @BeforeEach

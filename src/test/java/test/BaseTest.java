@@ -1,5 +1,6 @@
 package test;
 import consts.UrlParamsValues;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,6 +11,7 @@ public class BaseTest {
 
     @BeforeAll
     public static void setup(){
+        RestAssured.filters(new AllureRestAssured());//для работы с фильтрами
         RestAssured.baseURI = "https://api.trello.com/1";
     }
 
