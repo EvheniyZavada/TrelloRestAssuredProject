@@ -14,7 +14,7 @@ public class TwoNumbersAdditionSteps {
 
     private int result;
 
-    @Given("user has number one as {int}")
+    @Given("user has number one as 10")
     public void userHasNumberOneAs(Integer int1){
         numberOne = int1;
     }
