@@ -31,7 +31,7 @@ public class GetBoardsTest extends BaseTest {
                 .queryParams("fields", "id,name")
                 .get(GET_BOARD_URL)
                 .then()
-                .statusCode(400)
+                .statusCode(200)
 //        var timeInSeconds = response.getTimeIn(TimeUnit.SECONDS);
 //        System.out.println("response time " + timeInSeconds + " seconds");
 //              .assertThat()
