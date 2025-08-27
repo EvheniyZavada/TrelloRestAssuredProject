@@ -25,4 +25,4 @@ Feature: Get boards
     And body value has the following values by paths:
       | path | expected_value |
       | name | доска          |
-    And the jsonSchema is 'get_board.json' valid
+    And the response matches 'get_board.json' schema

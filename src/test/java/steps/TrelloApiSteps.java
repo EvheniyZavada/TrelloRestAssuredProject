@@ -88,7 +88,7 @@ public class TrelloApiSteps {
         }
     }
 
-    @And("the jsonSchema is '{}' valid")
+    @And("the response matches '{}' schema")
     public void theJsonSchemaIsValid(String pathToSchema){
         response.then().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schemas/" + pathToSchema));
     }
