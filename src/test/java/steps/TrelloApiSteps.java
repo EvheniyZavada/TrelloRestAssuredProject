@@ -11,7 +11,6 @@ import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.junit.runner.Request;
 
 import java.util.HashMap;
 import java.util.List;

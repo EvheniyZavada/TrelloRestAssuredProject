@@ -13,7 +13,9 @@
         <maven.compiler.target>24</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <allure.version>2.25.0</allure.version>
-        <junit.jupiter.version>5.9.2</junit.jupiter.version>
+        <junit.jupiter.version>5.10.0</junit.jupiter.version>
+        <cucumber.version>7.16.1</cucumber.version>
+        <rest-assured.version>5.5.0</rest-assured.version>
     </properties>
     <dependencies>
         <dependency>
@@ -24,23 +26,18 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>5.5.0</version>
+            <version>${rest-assured.version}</version>
             <scope>test</scope>
         </dependency>
             <dependency>
                 <groupId>io.rest-assured</groupId>
                 <artifactId>json-schema-validator</artifactId>
-                <version>5.5.0</version>
+                <version>${rest-assured.version}</version>
             </dependency>
+        <!-- JUnit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.jupiter.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
+            <artifactId>junit-jupiter</artifactId>
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
@@ -59,18 +56,12 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>7.14.0</version>
+            <version>${cucumber.version}</version>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit-platform-engine</artifactId>
-            <version>7.14.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>7.14.0</version>
+            <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -86,5 +77,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
