@@ -8,9 +8,13 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.hamcrest.Matchers;
+import org.joda.time.LocalDateTime;
+import org.junit.jupiter.api.Assertions;
 
 import java.util.HashMap;
 import java.util.List;
@@ -91,5 +95,30 @@ public class TrelloApiSteps {
     public void theJsonSchemaIsValid(String pathToSchema){
         response.then().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schemas/" + pathToSchema));
     }
+
+    @And("the request has headers:")
+    public void theRequestHasHeader(DataTable dataTable){
+        request.headers(dataTable.asMap());
+    }
+
+    @And("the request has body params:")
+    public void theRequestHasBodyParams(DataTable dataTable){
+        request.body(dataTable.asMap());
+    }
+
+    @And("body value has one the following values by paths:")
+    public void theResponseNameOfUpdatedBoard(DataTable dataTable) {
+        List<Map<String, String>> rows = dataTable.asMaps();
+        for (Map<String, String> row : rows) {
+            response.then().body(row.get("path"), Matchers.hasItem(row.get("expected_value")));
+        }
+    }
+
+    @And("the response body is equal to {string}")
+    public void theResponseBodyIsEqualTo(String expectedValue){
+        Assertions.assertEquals(expectedValue,response.body().asString());
+    }
+
+
 
 }

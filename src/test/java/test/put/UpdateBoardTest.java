@@ -37,6 +37,5 @@ public class UpdateBoardTest extends BaseTest {
                 .statusCode(200)
                 .body("name", Matchers.hasItem(newBoardName))
                 .log().body();
-
     }
 }

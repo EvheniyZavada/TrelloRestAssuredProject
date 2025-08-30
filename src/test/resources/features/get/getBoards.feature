@@ -1,10 +1,12 @@
 Feature: Get boards
   I want to get access to all my boards
 
-  Scenario: Check Get Boards
+  Background: request with authorization and query params
     Given request with authorization
     And the request has query params:
       | fields | id,name |
+
+  Scenario: Check Get Boards
     And the request has path params:
       | name | value                |
       | id   | zavada1997@gmail.com |
@@ -13,9 +15,6 @@ Feature: Get boards
 
 
   Scenario: Check Get Board
-    Given request with authorization
-    And the request has query params:
-      | fields | id,name |
     And the request has path params:
       | name | value                    |
       | id   | 68499967310c9b0128bb22c1 |
