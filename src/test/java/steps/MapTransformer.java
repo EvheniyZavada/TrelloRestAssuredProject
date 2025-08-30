@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MapTransformer {
+
     @DataTableType //исп реализацию мапы с dataTable
     public Map<String,String> map (DataTable dataTable){
         List<List<String>> rows = dataTable.cells();

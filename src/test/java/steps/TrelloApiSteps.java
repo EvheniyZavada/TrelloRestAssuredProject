@@ -8,12 +8,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.hamcrest.Matchers;
-import org.joda.time.LocalDateTime;
 import org.junit.jupiter.api.Assertions;
 
 import java.util.HashMap;
@@ -47,8 +45,7 @@ public class TrelloApiSteps {
     }
 
     @And("the request has query params:")
-    public void theRequestHasQueryParams(DataTable dataTable){ //dataTable позволяет исп параметры в виде Map
-        Map<String,String> queryParams = dataTable.asMap();
+    public void theRequestHasQueryParams(Map<String, String> queryParams){ //dataTable позволяет исп параметры в виде Map
         request = request.queryParams(queryParams);
     }
 
@@ -116,9 +113,7 @@ public class TrelloApiSteps {
 
     @And("the response body is equal to {string}")
     public void theResponseBodyIsEqualTo(String expectedValue){
-        Assertions.assertEquals(expectedValue,response.body().asString());
+        Assertions.assertEquals(expectedValue, response.body().asString());
     }
-
-
 
 }
