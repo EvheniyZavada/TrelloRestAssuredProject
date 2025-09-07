@@ -1,7 +1,7 @@
 Feature: Update boards
   I want to update one of my boards
 
-  Scenario: Check Update Board
+  Scenario: Check update board
     #update board
     Given request with authorization
     And the request has headers:
@@ -11,7 +11,7 @@ Feature: Update boards
       | id   | 68345f6639f73183f84a5dfb |
     And the request has body params:
       | name | Updated_Board |
-    When the 'PUT' request is sent to '/boards/{id}' endpoint
+    When the 'PUT' request is sent to 'UPDATE_A_BOARD' endpoint
     Then the response status code is 200
     And body value has the following values by paths:
       | path | expected_value |
@@ -23,7 +23,7 @@ Feature: Update boards
     And the request has path params:
       | name | value                |
       | id   | zavada1997@gmail.com |
-    When the 'GET' request is sent to '/members/{id}/boards' endpoint
+    When the 'GET' request is sent to 'GET_ALL_BOARDS' endpoint
     Then the response status code is 200
     And body value has one the following values by paths:
       | path | expected_value |

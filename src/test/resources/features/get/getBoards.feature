@@ -10,7 +10,7 @@ Feature: Get boards
     And the request has path params:
       | name | value                |
       | id   | zavada1997@gmail.com |
-    When the 'GET' request is sent to '/members/{id}/boards' endpoint
+    When the 'GET' request is sent to 'GET_ALL_BOARDS' endpoint
     Then the response status code is 200
 
 
@@ -18,7 +18,7 @@ Feature: Get boards
     And the request has path params:
       | name | value                    |
       | id   | 68499967310c9b0128bb22c1 |
-    When the 'GET' request is sent to '/boards/{id}' endpoint
+    When the 'GET' request is sent to 'GET_A_BOARD' endpoint
     Then the response status code is 200
     And the response time is less than 3000
     And body value has the following values by paths:

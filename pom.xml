@@ -20,6 +20,11 @@
     <dependencies>
         <dependency>
             <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
             <artifactId>cucumber-expressions</artifactId>
             <version>16.1.0</version>
         </dependency>

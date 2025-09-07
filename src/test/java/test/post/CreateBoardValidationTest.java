@@ -22,6 +22,7 @@ public class CreateBoardValidationTest extends BaseTest {
     public void checkCreateBoardWithInvalidAuth(AuthValidationArgumentsHolder validationArguments){
         Response response = requestWithoutAuth()
                 .log().method()
+                .queryParams(validationArguments.getAuthParams())
                 .contentType(ContentType.JSON)
                 .body(Map.of("name", "noname"))
                 .post(CREATE_BOARD_URL);

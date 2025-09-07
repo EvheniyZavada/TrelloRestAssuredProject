@@ -23,7 +23,7 @@ public class AuthUpdateCardValidationArgumentsProvider implements ArgumentsProvi
                 ),
                 new AuthValidationArgumentsHolder(//только токен
                         Map.of("token", "ATTAac7d6572f06502abadc634407cef8927be972cf00c41777a053365e7ffcb6101C7527E9B"),
-                        "{\"message\":\"missing scopes\"}"
+                        "invalid key"
                 )
         ).map(Arguments::of); //
     }

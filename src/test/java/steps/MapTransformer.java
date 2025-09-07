@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static consts.UrlParamsValues.VALID_KEY;
+import static consts.UrlParamsValues.VALID_TOKEN;
+
 public class MapTransformer {
 
     @DataTableType //исп реализацию мапы с dataTable
@@ -22,6 +25,8 @@ public class MapTransformer {
     private String convertValue(String value){
         return switch (value){
             case "empty_value" -> "";
+            case "current_user_key" -> VALID_KEY;
+            case "current_user_token" -> VALID_TOKEN;
             default -> value;
         };
     }

@@ -28,6 +28,7 @@ public class UpdateCardValidationTest extends BaseTest {
         Response response = requestWithoutAuth()
                 .log().method()
                 .pathParams("id", CARD_ID_TO_UPDATE)
+                .queryParams(validationArguments.getAuthParams())
                 .contentType(ContentType.JSON)
                 .body(Map.of("name", "noname"))
                 .put(UPDATE_CARD_URL);

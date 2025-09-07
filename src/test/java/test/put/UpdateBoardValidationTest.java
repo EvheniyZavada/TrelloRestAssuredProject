@@ -24,6 +24,7 @@ public class UpdateBoardValidationTest extends BaseTest {
         Response response = requestWithoutAuth()
                 .log().method()
                 .pathParam("id", BOARD_ID_TO_UPDATE)
+                .queryParams(argumentsHolder.getAuthParams())
                 .contentType(ContentType.JSON)
                 .body(Map.of("name", "new_name"))
                 .put(UPDATE_BOARD_URL);
