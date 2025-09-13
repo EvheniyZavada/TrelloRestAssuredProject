@@ -1,5 +1,7 @@
 package consts;
 
+import java.util.Map;
+
 public class UrlParamsValues {
     public static final String USER_NAME = "zavada1997@gmail.com";
     public static final String MY_BOARD_ID = "684497a8f96fc4515a307c4d";
@@ -20,6 +22,14 @@ public class UrlParamsValues {
 
     public static final String VALID_KEY = "4d9dd97638a81eaec3d5a7f125b6b562";
     public static final String VALID_TOKEN = "ATTAac7d6572f06502abadc634407cef8927be972cf00c41777a053365e7ffcb6101C7527E9B";
+    public static final String VALID_ANOTHER_ACC_KEY = "ca9a5e64ac270054e17b7b0ea75694d9";
+    public static final String VALID_ANOTHER_ACC_TOKEN = "ATTA92296bc4c76d565ac8e5a8dde2cc01e750501ff5f68725ebfd2d940b6d6ae3e406B7BFA5";
+
+
+    public static final Map<String, String> AUTH_QUERY_PARAMS = Map.of(
+            "key", VALID_KEY,
+            "token", VALID_TOKEN
+    );
 }
 
 

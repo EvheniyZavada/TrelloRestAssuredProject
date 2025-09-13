@@ -7,8 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static consts.UrlParamsValues.VALID_KEY;
-import static consts.UrlParamsValues.VALID_TOKEN;
+import static consts.UrlParamsValues.*;
 
 public class MapTransformer {
 
@@ -27,6 +26,8 @@ public class MapTransformer {
             case "empty_value" -> "";
             case "current_user_key" -> VALID_KEY;
             case "current_user_token" -> VALID_TOKEN;
+            case "another_acc_user_key" -> VALID_ANOTHER_ACC_KEY;
+            case "another_acc_user_token" -> VALID_ANOTHER_ACC_TOKEN;
             default -> value;
         };
     }

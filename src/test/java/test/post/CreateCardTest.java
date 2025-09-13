@@ -20,19 +20,19 @@ public class CreateCardTest extends BaseTest {
     private String createdCardId;
 
     @Test
-    public void checkCreateCard(){
+    public void checkCreateCard() {
         String cardName = "createdCardByRestAssured" + LocalDateTime.now();
         Response response = requestWithAuth()
                 .log().method()
                 .contentType(ContentType.JSON) //must have(как в постмане нужно тип тела выбрать)
-              //  .queryParams("fields", "id,name,desc")
+                //  .queryParams("fields", "id,name,desc")
                 .body(Map.of("idList", MY_BOARD_IN_PROGRESS_LIST_ID, "name", cardName, "desc", "*_*"))
                 .post(CREATE_CARD_URL);
         createdCardId = response.jsonPath().get("id");
         response
                 .then()
                 .statusCode(200)
-                .body("name",equalTo(cardName))
+                .body("name", equalTo(cardName))
                 .log().body();
         requestWithAuth()
                 .pathParam("id", MY_BOARD_IN_PROGRESS_LIST_ID)
@@ -46,7 +46,7 @@ public class CreateCardTest extends BaseTest {
     }
 
     @AfterEach
-    public void deleteCreatedCard(){
+    public void deleteCreatedCard() {
         requestWithAuth()
                 .pathParam("id", createdCardId)
                 .delete(DELETE_CARD_URL)

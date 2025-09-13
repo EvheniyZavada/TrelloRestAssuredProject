@@ -1,18 +1,18 @@
 package steps;
 
 import consts.Endpoint;
-import consts.UrlParamsValues;
 import io.cucumber.core.options.CurlOption;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import io.restassured.RestAssured;
-import io.restassured.specification.RequestSpecification;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static utils.AuthorizationRequestProvider.requestWithAuth;
+import static utils.AuthorizationRequestProvider.requestWithoutAuth;
 
 public class TrelloApiActionSteps {
 
@@ -22,29 +22,10 @@ public class TrelloApiActionSteps {
         this.scenarioContext = scenarioContext;
     }
 
-
-    protected static RequestSpecification requestWithAuth(){
-        RestAssured.baseURI = "https://api.trello.com/1";
-        return RestAssured.given()
-                .queryParams(Map.of("key", UrlParamsValues.VALID_KEY,
-                        "token", UrlParamsValues.VALID_TOKEN))
-                .header("Accept", "application/json");
-    }
-
-    protected static RequestSpecification requestWithoutAuth(){
-        RestAssured.baseURI = "https://api.trello.com/1";
-        return RestAssured.given();
-    }
-
     @Given("request {with} authorization")
     public void requestWithAuthorization(boolean withAuth){
        scenarioContext.setRequest(withAuth ? requestWithAuth() : requestWithoutAuth());
     }
-
-//    @Given("request without authorization")
-//    public void requestWithoutAuthorization(){
-//        scenarioContext.setRequest(requestWithoutAuth());
-//    }
 
     @And("the request has query params:")
     public void theRequestHasQueryParams(Map<String, String> queryParams){ //dataTable позволяет исп параметры в виде Map
@@ -56,7 +37,9 @@ public class TrelloApiActionSteps {
         Map<String,String> pathParams = new HashMap<>();
         List<Map<String,String>> rows = dataTable.asMaps();
         for (Map<String,String> row : rows){
-            pathParams.put(row.get("name"),row.get("value"));
+            String rowValue = row.get("value");
+            String value = rowValue.equals("created_board_id") ? scenarioContext.getBoardId() : rowValue;
+            pathParams.put(row.get("name"), value);
         }
         scenarioContext.setRequest(scenarioContext.getRequest().pathParams(pathParams));
     }
@@ -82,6 +65,18 @@ public class TrelloApiActionSteps {
     @And("the request has body params:")
     public void theRequestHasBodyParams(DataTable dataTable){
         scenarioContext.setRequest(scenarioContext.getRequest().body(dataTable.asMap()));
+    }
+
+    @And("the board id from the response is remembered")
+    public void theBoardIdFromTheResponseIsRemembered() {
+        String createdBoardId = scenarioContext.getResponse().body().jsonPath().get("id");
+        scenarioContext.setBoardId(createdBoardId);
+    }
+
+    @And("the card id from the response is remembered")
+    public void theCardIdFromTheResponseIsRemembered() {
+        String createdCardId = scenarioContext.getResponse().body().jsonPath().get("id");
+        scenarioContext.setCardId(createdCardId);
     }
 
 

@@ -1,7 +1,8 @@
 Feature: Create a board
   I want to create a new board
 
-  Scenario: Check create a
+  @deleteBoard
+  Scenario: Check create a board
     #создание новой доски
     Given request with authorization
     And the request has body params:
@@ -13,6 +14,7 @@ Feature: Create a board
     And body value has the following values by paths:
       | path | expected_value |
       | name | Cucumber_board |
+    And the board id from the response is remembered
     #проверка что доска создалась GET запросом
     Given request with authorization
     And the request has query params:

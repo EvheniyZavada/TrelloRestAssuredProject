@@ -38,10 +38,11 @@ Feature: Update card validation
     And the response body is equal to '<error_message>'
 
     Examples:
-    | key              | token              | error_message                    |
-    | empty_value      | empty_value        | {\"message\":\"missing scopes\"} |
-    | current_user_key | empty_value        | {\"message\":\"missing scopes\"} |
-    | empty_value      | current_user_token | invalid key                      |
+      | key                  | token                  | error_message                     |
+      | empty_value          | empty_value            | {\"message\":\"missing scopes\"}  |
+      | current_user_key     | empty_value            | {\"message\":\"missing scopes\"}  |
+      | empty_value          | current_user_token     | invalid key                       |
+      | another_acc_user_key | another_acc_user_token | unauthorized card permission requested |
 
 
 

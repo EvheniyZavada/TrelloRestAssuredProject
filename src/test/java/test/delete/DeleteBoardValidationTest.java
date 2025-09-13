@@ -20,6 +20,7 @@ public class DeleteBoardValidationTest extends BaseTest {
     public void checkDeleteBoardWithInvalidAuth(AuthValidationArgumentsHolder validationArguments){
         Response response = requestWithoutAuth()
                 .log().method()
+                .queryParams(validationArguments.getAuthParams())
                 .pathParam("id",BOARD_ID)
                 .delete(DELETE_BOARD_URL);
         response

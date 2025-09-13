@@ -1,10 +1,6 @@
 Feature: Create board validation
   Check create boards with validation params
 
-#Background:...?
-#  And the request has headers:
-#  | Content-Type | application/json |
-
   Scenario Outline: Check create board with invalid id
     Given request with authorization
     And the request has headers:
@@ -35,8 +31,9 @@ Feature: Create board validation
     And the response body is equal to '<error_message>'
 
     Examples:
-      | key              | token              | error_message                |
-      | empty_value      | empty_value        | {"message":"missing scopes"} |
-      | current_user_key | empty_value        | {"message":"missing scopes"} |
-      | empty_value      | current_user_token | invalid key                  |
+      | key                  | token                  | error_message                          |
+      | empty_value          | empty_value            | {"message":"missing scopes"}           |
+      | current_user_key     | empty_value            | {"message":"missing scopes"}           |
+      | empty_value          | current_user_token     | invalid key                            |
+
 

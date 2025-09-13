@@ -52,11 +52,18 @@ public class TrelloApiAssertSteps {
         }
     }
 
+    @And("body value has not the following values by paths:")
+    public void theResponseIdOfDeletedBoard(DataTable dataTable) {
+        for(Map.Entry<String,String> row : dataTable.asMap().entrySet()){
+            String rowValue = row.getValue();
+            String expectedValue = rowValue.equals("created_board_id")? scenarioContext.getBoardId() : rowValue;
+            scenarioContext.getResponse().then().body("id", Matchers.not(Matchers.hasItem(expectedValue)));
+        }
+    }
+
     @And("the response time is less than {long}")
     public void theResponseTimeIs(long expectedTime){
         scenarioContext.getResponse().then().time(lessThan(expectedTime));
     }
-
-
 
 }

@@ -21,7 +21,7 @@ public class CreateBoardTest extends BaseTest {
     @Test
     public void checkCreateBoard(){
 
-        String boardName = "CreatedBoard" + LocalDateTime.now();
+        String boardName = "CreatedBoard1" + LocalDateTime.now();
          Response response = requestWithAuth()
                 .log().method()
                 .body(Map.of("name", boardName))

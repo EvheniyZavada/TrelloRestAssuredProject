@@ -24,6 +24,7 @@ public class CreateCardValidationTest extends BaseTest {
         Response response = requestWithoutAuth()
                 .log().method()
                 .contentType(ContentType.JSON)
+                .queryParams(validationArguments.getAuthParams())
                 .body(Map.of("idList", UrlParamsValues.MY_BOARD_IN_PROGRESS_LIST_ID, "name", "My_name"))
                 .post(CREATE_CARD_URL);
         response

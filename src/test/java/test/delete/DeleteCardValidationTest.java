@@ -19,6 +19,7 @@ public class DeleteCardValidationTest extends BaseTest {
     public void checkDeleteCardWithInvalidAuth(AuthValidationArgumentsHolder validationArguments){
         Response response = requestWithoutAuth()
                 .log().method()
+                .queryParams(validationArguments.getAuthParams())
                 .pathParam("id", CARD_ID_TO_UPDATE)
                 .delete(DELETE_CARD_URL);
         response
